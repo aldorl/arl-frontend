@@ -13,21 +13,20 @@ import messages from './messages';
 import { createStructuredSelector } from 'reselect';
 
 import {
-  selectRepos,
+  // selectRepos,
   selectLoading,
   selectError,
 } from 'containers/App/selectors';
 
-import {
-  selectUsername,
-} from './selectors';
+// import {
+//   selectUsername,
+// } from './selectors';
 
 import { changeUsername } from './actions';
-import { loadRepos } from '../App/actions';
+// import { loadRepos } from '../App/actions';
 
 import { FormattedMessage } from 'react-intl';
-import RepoListItem from 'containers/RepoListItem';
-import Button from 'components/Button';
+// import Button from 'components/Button';
 import H2 from 'components/H2';
 import List from 'components/List';
 import ListItem from 'components/ListItem';
@@ -36,14 +35,6 @@ import LoadingIndicator from 'components/LoadingIndicator';
 import styles from './styles.css';
 
 export class HomePage extends React.Component {
-  /**
-   * when initial state username is not null, submit the form to load repos
-   */
-  componentDidMount() {
-    if (this.props.username && this.props.username.trim().length > 0) {
-      this.props.onSubmitForm();
-    }
-  }
   /**
    * Changes the route
    *
@@ -54,10 +45,10 @@ export class HomePage extends React.Component {
   };
 
   /**
-   * Changed route to '/features'
+   * Changed route to '/'
    */
   openFeaturesPage = () => {
-    this.openRoute('/features');
+    this.openRoute('/');
   };
 
   render() {
@@ -73,14 +64,12 @@ export class HomePage extends React.Component {
         <ListItem item={'Something went wrong, please try again!'} />
       );
       mainContent = (<List component={ErrorComponent} />);
-
-    // If we're not loading, don't have an error and there are repos, show the repos
-    } else if (this.props.repos !== false) {
-      mainContent = (<List items={this.props.repos} component={RepoListItem} />);
+    } else {
+      mainContent = null;
     }
 
     return (
-      <article>
+      <div>
         <Helmet
           title="Home Page"
           meta={[
@@ -90,39 +79,17 @@ export class HomePage extends React.Component {
         <div>
           <section className={`${styles.textSection} ${styles.centered}`}>
             <H2>
-              <FormattedMessage {...messages.startProjectHeader} />
+              <FormattedMessage {...messages.header} />
             </H2>
-            <p>
-              <FormattedMessage {...messages.startProjectMessage} />
-            </p>
           </section>
           <section className={styles.textSection}>
             <H2>
-              <FormattedMessage {...messages.trymeHeader} />
+              Just testing...
             </H2>
-            <form className={styles.usernameForm} onSubmit={this.props.onSubmitForm}>
-              <label htmlFor="username">
-                <FormattedMessage {...messages.trymeMessage} />
-                <span className={styles.atPrefix}>
-                  <FormattedMessage {...messages.trymeAtPrefix} />
-                </span>
-                <input
-                  id="username"
-                  className={styles.input}
-                  type="text"
-                  placeholder="mxstbr"
-                  value={this.props.username}
-                  onChange={this.props.onChangeUsername}
-                />
-              </label>
-            </form>
             {mainContent}
           </section>
-          <Button handleRoute={this.openFeaturesPage}>
-            <FormattedMessage {...messages.featuresButton} />
-          </Button>
         </div>
-      </article>
+      </div>
     );
   }
 }
@@ -134,31 +101,31 @@ HomePage.propTypes = {
     React.PropTypes.object,
     React.PropTypes.bool,
   ]),
-  repos: React.PropTypes.oneOfType([
-    React.PropTypes.array,
-    React.PropTypes.bool,
-  ]),
-  onSubmitForm: React.PropTypes.func,
-  username: React.PropTypes.string,
-  onChangeUsername: React.PropTypes.func,
+  // repos: React.PropTypes.oneOfType([
+  //   React.PropTypes.array,
+  //   React.PropTypes.bool,
+  // ]),
+  // onSubmitForm: React.PropTypes.func,
+  // username: React.PropTypes.string,
+  // onChangeUsername: React.PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
     onChangeUsername: (evt) => dispatch(changeUsername(evt.target.value)),
     changeRoute: (url) => dispatch(push(url)),
-    onSubmitForm: (evt) => {
-      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadRepos());
-    },
+    // onSubmitForm: (evt) => {
+    //   if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+    //   dispatch(loadRepos());
+    // },
 
     dispatch,
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  repos: selectRepos(),
-  username: selectUsername(),
+  // repos: selectRepos(),
+  // username: selectUsername(),
   loading: selectLoading(),
   error: selectError(),
 });

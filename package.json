@@ -1,15 +1,15 @@
 {
-  "name": "react-boilerplate",
-  "version": "3.2.0",
-  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
+  "name": "arl-frontend",
+  "version": "0.1.0",
+  "description": "Personal branding website for Aldo Ruiz Luna",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mxstbr/react-boilerplate.git"
+    "url": "git://github.com/aldorl/arl-frontend.git"
   },
   "engines": {
     "npm": ">=3"
   },
-  "author": "Max Stoiber",
+  "author": "Aldo Ruiz Luna",
   "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
@@ -180,7 +180,7 @@
     }
   },
   "dllPlugin": {
-    "path": "node_modules/react-boilerplate-dlls",
+    "path": "node_modules/arl-frontend-dlls",
     "exclude": [
       "chalk",
       "compression",

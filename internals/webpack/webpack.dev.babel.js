@@ -74,7 +74,7 @@ function dependencyHandlers() {
     ];
   }
 
-  const dllPath = path.resolve(process.cwd(), dllPlugin.path || 'node_modules/react-boilerplate-dlls');
+  const dllPath = path.resolve(process.cwd(), dllPlugin.path || 'node_modules/arl-frontend-dlls');
 
   /**
    * If DLLs aren't explicitly defined, we assume all production dependencies listed in package.json
@@ -83,7 +83,7 @@ function dependencyHandlers() {
    * @see https://github.com/mxstbr/react-boilerplate/tree/master/docs/general/webpack.md
    */
   if (!dllPlugin.dlls) {
-    const manifestPath = path.resolve(dllPath, 'reactBoilerplateDeps.json');
+    const manifestPath = path.resolve(dllPath, 'arlFrontendDeps.json');
 
     if (!fs.existsSync(manifestPath)) {
       logger.error('The DLL manifest is missing. Please run `npm run build:dll`');
@@ -132,7 +132,7 @@ function templateContent() {
 
   const doc = cheerio(html);
   const body = doc.find('body');
-  const dllNames = !dllPlugin.dlls ? ['reactBoilerplateDeps'] : Object.keys(dllPlugin.dlls);
+  const dllNames = !dllPlugin.dlls ? ['arlFrontendDeps'] : Object.keys(dllPlugin.dlls);
 
   dllNames.forEach((dllName) => body.append(`<script data-dll='true' src='/${dllName}.dll.js'></script>`));
 

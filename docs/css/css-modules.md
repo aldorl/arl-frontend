@@ -82,7 +82,7 @@ run the application.
 
 Now edit `internals/config.js` and make the following modifications
 ```javascript
-const ReactBoilerplate = {
+const ArlFrontend = {
   /* ... */
   dllPlugin: {
     defaults: {
